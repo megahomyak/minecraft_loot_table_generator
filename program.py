@@ -23,7 +23,7 @@ def process(file_name):
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": f"minecraft:{item_name}"
+                    "name": item_name,
                 }
             ]
         })
@@ -32,6 +32,6 @@ def process(file_name):
     with open(base + ".json", "w") as f:
         json.dump({
             "pools": pools,
-        }, f)
+        }, f, indent=4)
 
 process(args.file_name)
