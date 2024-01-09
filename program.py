@@ -1,10 +1,23 @@
 import json
 import os
-import argparse
+import tkinter
+import tkinter.filedialog
 
-parser = argparse.ArgumentParser()
-parser.add_argument("file_name")
-args = parser.parse_args()
+window = tkinter.Tk()
+window.geometry("500x500")
+def process_button_clicked():
+    filetypes = (
+        ('text files', '*.txt'),
+        ('All files', '*.*'),
+    )
+    file_name = tkinter.filedialog.askopenfilename(
+        title='Open a file',
+        initialdir='/',
+        filetypes=filetypes,
+    )
+    process(file_name)
+process_button = tkinter.Button(window, text="Process", command=process_button_clicked)
+process_button.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
 
 def process(file_name):
     pools = []
@@ -34,4 +47,4 @@ def process(file_name):
             "pools": pools,
         }, f, indent=4)
 
-process(args.file_name)
+window.mainloop()
